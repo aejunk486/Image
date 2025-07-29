@@ -1,0 +1,41 @@
+import React from 'react';
+import { View, Image, StyleSheet, Platform } from 'react-native';
+
+const ViewImage = () => {
+  return (
+    <View style={styles.container}>
+      {/* รูปภาพพร้อมมุมโค้งและเงา */}
+      <Image
+        source={require('./assets/pic1.jpg')}
+        style={styles.image}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, // ให้ View เต็มหน้าจอ
+    alignItems: 'center', // จัดรูปภาพให้อยู่ตรงกลางแนวนอน
+    justifyContent: 'center', // จัดให้อยู่กลางแนวตั้ง
+    backgroundColor: '#f0f0f0', // เพิ่มพื้นหลังอ่อน ๆ ให้ภาพดูเด่นขึ้น
+  },
+  image: {
+    width: '60%', // รูปกว้าง 60% ของหน้าจอ
+    height: 200, // ความสูงคงที่
+    borderRadius: 16, // มุมโค้งมน
+    // เงาสำหรับ iOS
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6.27,
+    // เงาสำหรับ Android
+    elevation: 10,
+    backgroundColor: '#fff', // จำเป็นต้องใส่พื้นหลังเพื่อให้เงาทำงานบน Android
+  },
+});
+
+export default ViewImage;
