@@ -1,0 +1,74 @@
+import React from 'react';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import Swiper from 'react-native-swiper';
+
+const { width } = Dimensions.get('window');
+
+const ImageSwiper = () => {
+  return (
+    <View style={styles.container}>
+      <Swiper
+        autoplay       // เล่นอัตโนมัติ
+        loop           // วนซ้ำเมื่อเลื่อนถึงภาพสุดท้าย
+        showsPagination // แสดงจุดบอกตำแหน่ง
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+      >
+        {/* ภาพที่ 1 */}
+        <View style={styles.slide}>
+          <Image
+            source={require('./assets/pic1.jpg')}
+            style={styles.image}
+          />
+          <Text style={styles.caption}>ภาพที่ 1</Text>
+        </View>
+        {/* ภาพที่ 2 */}
+        <View style={styles.slide}>
+          <Image
+            source={require('./assets/pic2.jpg')}
+            style={styles.image}
+          />
+          <Text style={styles.caption}>ภาพที่ 2</Text>
+        </View>
+      </Swiper>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: width * 0.9,
+    height: 250,
+    borderRadius: 16,
+  },
+  caption: {
+    marginTop: 12,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  dot: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    margin: 3,
+  },
+  activeDot: {
+    backgroundColor: '#000',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    margin: 3,
+  },
+});
+
+export default ImageSwiper;
