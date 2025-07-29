@@ -1,0 +1,70 @@
+// นำเข้า Component ที่ต้องใช้จาก react-native
+import React from 'react';
+import {
+  SafeAreaView,     // ช่วยเว้นระยะให้ไม่ชนขอบบน (เช่น notch, status bar)
+  View,              // ใช้สำหรับจัด Layout
+  StyleSheet,        // ใช้เขียนสไตล์แยก
+  ImageBackground,   // ใช้แสดงรูปภาพเป็นพื้นหลัง
+  Text,              // ใช้แสดงข้อความ
+  Dimensions         // ใช้เพื่อดึงขนาดหน้าจอ (กว้าง/สูง)
+} from 'react-native';
+
+const ViewImage = () => {
+  // ดึงขนาดหน้าจอ (เป็นหน่วย dp)
+  const { width, height } = Dimensions.get('window');
+  const backgroundHeight = height * 0.75; // ใช้ 75% ของความสูงหน้าจอสำหรับภาพพื้นหลัง
+
+  return (
+    // SafeAreaView จะช่วยให้ UI ไม่ชนขอบจอบนอุปกรณ์ที่มี notch (เช่น iPhone 15)
+    <SafeAreaView style={styles.container}>
+      
+      {/* ส่วนของเนื้อหาด้านล่างภาพพื้นหลัง */}
+      <View style={styles.content}>
+        <Text>เนื้อหาอื่น ๆ ใต้ภาพพื้นหลัง</Text>
+      </View>
+
+      {/* แสดงภาพ pic1.jpg เป็นพื้นหลัง */}
+      <ImageBackground
+        source={{uri:'https://i.pinimg.com/736x/64/ab/11/64ab11fcb40aa5cbc261581347b220f4.jpg'}} // โหลดภาพจาก assets
+        style={[styles.background, { width, height: backgroundHeight }]} // ตั้งขนาดของพื้นหลัง
+        imageStyle={styles.backgroundImage} // กำหนด style เฉพาะให้กับภาพ (เช่น โค้งมุม)
+      >
+        {/* กล่องข้อความที่แสดงบนภาพพื้นหลัง */}
+        <View style={styles.overlay}>
+          <Text style={styles.text}>สวัสดีค่ะ</Text>
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
+  );
+};
+
+// กำหนด Style แยก เพื่อให้โค้ดดูสะอาดและแก้ไขง่าย
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff', // ตั้งค่าพื้นหลังเป็นสีขาว (กรณีโหลดภาพช้าจะไม่เห็นพื้นดำ)
+  },
+  background: {
+    justifyContent: 'center',  // จัดเนื้อหาแนวตั้งให้อยู่ตรงกลาง
+    alignItems: 'center',      // จัดเนื้อหาแนวนอนให้อยู่ตรงกลาง
+  },
+  backgroundImage: {
+    borderBottomLeftRadius: 24,   // ทำมุมล่างซ้ายให้โค้งมน
+    borderBottomRightRadius: 24,  // ทำมุมล่างขวาให้โค้งมน
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)', // สีดำโปร่งใส 30% เพื่อให้ข้อความอ่านง่าย
+    padding: 12,
+    borderRadius: 8,
+  },
+  text: {
+    color: '#fff',          // สีตัวหนังสือเป็นขาว
+    fontSize: 20,           // ขนาดตัวหนังสือ
+    fontWeight: 'bold',     // หนานิดนึง
+  },
+  content: {
+    padding: 16,            // เพิ่มระยะห่างรอบ ๆ เนื้อหาล่าง
+  },
+});
+
+export default ViewImage;
