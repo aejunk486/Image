@@ -1,0 +1,45 @@
+import React, { useState } from 'react';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
+
+const App = () => {
+  const [name, setName] = useState('');
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>กรอกชื่อของคุณ:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="พิมพ์ที่นี่"
+        value={name}
+        onChangeText={text => setName(text)}
+      />
+      <Text style={styles.result}>หยุดยิงกี่โมง, {name || '...'}!</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 8,
+  },
+  input: {
+    height: 44,
+    borderWidth: 1,
+    borderColor: '#888',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    marginBottom: 16,
+  },
+  result: {
+    fontSize: 20,
+    color: 'green',
+  },
+});
+
+export default App;
